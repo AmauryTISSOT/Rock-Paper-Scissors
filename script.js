@@ -5,14 +5,16 @@ function computerPlay() {
     const computerChoice = ['Rock', 'Paper', 'Scissors'];
     let randomNumber = Math.floor(Math.random() * 3)
     let computer_random_Selection = computerChoice[randomNumber]
+    //console.log('Dans la fonction computer play : ' + computer_random_Selection)
     return (computer_random_Selection)
 }
 
 // Function who allows the player to choose between "Rock, Paper & Scissors"
 function playerPlay() {
-    let playerSelection = prompt('For Rock press 0 \nFor Paper press 1\nFor Scissors press 2');
+    let playerSelectionInput = prompt('For Rock press 0 \nFor Paper press 1\nFor Scissors press 2');
     const playerChoice = ['Rock', 'Paper', 'Scissors'];
-    let player_input_Selection = playerChoice[playerSelection]
+    let player_input_Selection = playerChoice[playerSelectionInput]
+    //console.log('Dans la fonction player play : ' + player_input_Selection)
     return (player_input_Selection)
 }
 
@@ -21,8 +23,8 @@ let playerScore = 0;
 
 // Function you play one round of "Rock, Paper & Scissors"
 function playRound(player_Selection, computer_Selection) {
-    console.log('Dans la fonction player selection' + player_Selection)
-    console.log('Dans la fonction ordi selection' + computer_Selection)
+    //console.log('Dans la fonction player selection ' + player_Selection)
+    //console.log('Dans la fonction ordi selection ' + computer_Selection)
 
   if (player_Selection == computer_Selection) {
       console.log('Tie game !')
@@ -49,7 +51,7 @@ function game() {
         let playerSelection = playerPlay();
         console.log(`The player has choose : ${playerSelection}`)
 
-        playRound(computerSelection, playerSelection)
+        playRound(player_Selection=playerSelection, computer_Selection=computerSelection)
     }
     console.log(`Computer score : ${computerScore}`);
     console.log(`Player score : ${playerScore}`);
