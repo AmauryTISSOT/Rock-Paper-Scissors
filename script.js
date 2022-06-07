@@ -20,50 +20,35 @@ let computerScore = 0;
 let playerScore = 0;
 
 // Function you play one round of "Rock, Paper & Scissors"
-function playRound(playerSelection, computerSelection) {
-    if (computerSelection == 'Rock' && playerSelection == 'Rock') {
-        console.log('Draw')
-    }
-    if (computerSelection == 'Rock' && playerSelection == 'Paper') {
-        console.log('Player win !')
-        playerScore += 1;
-    }
-    if (computerSelection == 'Rock' && playerSelection == 'Scissors') {
-        console.log('Computer win !')
-        computerScore += 1;
-    }
-    if (computerSelection == 'Paper' && playerSelection == 'Rock') {
-        console.log('Computer win !')
-        computerScore += 1;
-    }
-    if (computerSelection == 'Paper' && playerSelection == 'Paper') {
-        console.log('Draw')
-    }
-    if (computerSelection == 'Paper' && playerSelection == 'Scissors') {
-        console.log('Player win !')
-        playerScore += 1;
-    }
-    if (computerSelection == 'Scissors' && playerSelection == 'Rock') {
-        console.log('Player win !')
-        playerScore += 1;
-    }
-    if (computerSelection == 'Scissors' && playerSelection == 'Paper') {
-        console.log('Computer win !')
-        computerScore += 1;
-    }
-    if (computerSelection == 'Scissors' && playerSelection == 'Scissors') {
-        console.log('Draw')
-    }
+function playRound(player_Selection, computer_Selection) {
+    console.log('Dans la fonction player selection' + player_Selection)
+    console.log('Dans la fonction ordi selection' + computer_Selection)
 
+  if (player_Selection == computer_Selection) {
+      console.log('Tie game !')
+  }
+  if ((player_Selection == 'Rock' && computer_Selection == 'Scissors') || 
+     (player_Selection == 'Paper' && computer_Selection == 'Rock') ||
+     (player_Selection == 'Scissors' && computer_Selection == 'Paper')) {
+         console.log('Player win this round !')
+         playerScore += 1;
+     }
+  if ((player_Selection == 'Paper' && computer_Selection == 'Scissors') || 
+     (player_Selection == 'Scissors' && computer_Selection == 'Rock') ||
+     (player_Selection == 'Rock' && computer_Selection == 'Paper')) {
+         console.log('Computer win this round !')
+         computerScore += 1;
+     }
 }
 
 // Function who play 5 round of "Rock, Paper & Scissors"
 function game() {
     for (let i = 0; i < 5; i++) {
-        const computerSelection = computerPlay();
+        let computerSelection = computerPlay();
         console.log(`The computer has choose : ${computerSelection}`)
-        const playerSelection = playerPlay();
+        let playerSelection = playerPlay();
         console.log(`The player has choose : ${playerSelection}`)
+
         playRound(computerSelection, playerSelection)
     }
     console.log(`Computer score : ${computerScore}`);
