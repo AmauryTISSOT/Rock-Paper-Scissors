@@ -1,5 +1,6 @@
 let computerScore = 0;
 let playerScore = 0;
+let roundWinner = '';
 
 // Function who return a random choice between "Rock, Paper & Scissors"
 function computerPlay() {
@@ -10,28 +11,29 @@ function computerPlay() {
 }
 
 // Function who allows the player to choose between "Rock, Paper & Scissors"
-function playerPlay() {
-    let playerSelectionInput = prompt('For Rock press 0 \nFor Paper press 1\nFor Scissors press 2');
-    const playerChoice = ['Rock', 'Paper', 'Scissors'];
-    let player_input_Selection = playerChoice[playerSelectionInput]
-    return (player_input_Selection)
+function playerPlay(buttonClick) {
+    const playerChoice = buttonClick
+    return playerChoice;
 }
 
 // Function you play one round of "Rock, Paper & Scissors"
 function playRound(player_Selection, computer_Selection) {
   if (player_Selection == computer_Selection) {
       console.log('Tie game !')
+      roundWinner = 'Tie game !'
   }
   if ((player_Selection == 'Rock' && computer_Selection == 'Scissors') || 
      (player_Selection == 'Paper' && computer_Selection == 'Rock') ||
      (player_Selection == 'Scissors' && computer_Selection == 'Paper')) {
          console.log('Player win this round !')
+         roundWinner = 'You win this round !'
          playerScore += 1;
      }
   if ((player_Selection == 'Paper' && computer_Selection == 'Scissors') || 
      (player_Selection == 'Scissors' && computer_Selection == 'Rock') ||
      (player_Selection == 'Rock' && computer_Selection == 'Paper')) {
          console.log('Computer win this round !')
+         roundWinner = 'Computer win this round !'
          computerScore += 1;
      }
 }
@@ -41,7 +43,7 @@ function game() {
     for (let i = 0; i < 5; i++) {
         let computerSelection = computerPlay();
         console.log(`The computer has choose : ${computerSelection}`)
-        let playerSelection = playerPlay();
+        let playerSelection = playerChoice;
         console.log(`The player has choose : ${playerSelection}`)
 
         playRound(playerSelection=playerSelection, computerSelection=computerSelection)
@@ -59,6 +61,50 @@ function game() {
     }
 }
 
-game();
+// Event listener function
+const buttons = document.querySelectorAll('button');
+let playerSelection = ''
+let computerSelection = ''
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+       playerSelection = (button.className);
+       computerSelection = computerPlay();
+       console.log(`The player has choose : ${playerSelection}`);
+       console.log(`The computer has choose : ${computerSelection}`);
+       playRound(playerSelection=playerSelection, computerSelection=computerSelection);
+       showComputerChoice();
+       showWhoWinRound();
+       showScore();
+      });
+      
+});
+
+// Function who modify DOM to show the computer choice
+
+function showComputerChoice () {
+    const iaChoice = document.querySelector('.computerPlay');
+    iaChoice.textContent= `The computer choice : ${computerSelection}`;
+
+}
+
+// Function who modify DOM to show who win the round
+
+function showWhoWinRound() {
+    const showWin = document.querySelector('.whoWin');
+    showWin.textContent = roundWinner;
+}
+
+// Function who modify DOM to show player and computer score
+
+function showScore() {
+    const domComputerScore = document.querySelector('.computerScore');
+    domComputerScore.textContent = `Computer score : ${computerScore}`;
+   
+    const domPlayerScore = document.querySelector('.playerScore');
+    domPlayerScore.textContent = `Player score : ${playerScore}`;
+    
+}
+
+// game();
 
 
