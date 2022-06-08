@@ -1,6 +1,7 @@
 let computerScore = 0;
 let playerScore = 0;
 let roundWinner = '';
+let gameWinner = '';
 
 // Function who return a random choice between "Rock, Paper & Scissors"
 function computerPlay() {
@@ -10,11 +11,6 @@ function computerPlay() {
     return (computer_random_Selection)
 }
 
-// Function who allows the player to choose between "Rock, Paper & Scissors"
-function playerPlay(buttonClick) {
-    const playerChoice = buttonClick
-    return playerChoice;
-}
 
 // Function you play one round of "Rock, Paper & Scissors"
 function playRound(player_Selection, computer_Selection) {
@@ -36,30 +32,8 @@ function playRound(player_Selection, computer_Selection) {
          roundWinner = 'Computer win this round !'
          computerScore += 1;
      }
-}
+};
 
-// Function who play 5 round of "Rock, Paper & Scissors"
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let computerSelection = computerPlay();
-        console.log(`The computer has choose : ${computerSelection}`)
-        let playerSelection = playerChoice;
-        console.log(`The player has choose : ${playerSelection}`)
-
-        playRound(playerSelection=playerSelection, computerSelection=computerSelection)
-    }
-    console.log(`Computer score : ${computerScore}`);
-    console.log(`Player score : ${playerScore}`);
-    if (computerScore > playerScore) {
-        console.log('Computer win the game !')
-    }
-    else if (computerScore < playerScore) {
-        console.log('Player win the game !')
-    }
-    else {
-        console.log('DRAW !')
-    }
-}
 
 // Event listener function
 const buttons = document.querySelectorAll('button');
@@ -75,6 +49,7 @@ buttons.forEach((button) => {
        showComputerChoice();
        showWhoWinRound();
        showScore();
+       whoWinTheGame();
       });
       
 });
@@ -92,7 +67,7 @@ function showComputerChoice () {
 function showWhoWinRound() {
     const showWin = document.querySelector('.whoWin');
     showWin.textContent = roundWinner;
-}
+};
 
 // Function who modify DOM to show player and computer score
 
@@ -103,8 +78,20 @@ function showScore() {
     const domPlayerScore = document.querySelector('.playerScore');
     domPlayerScore.textContent = `Player score : ${playerScore}`;
     
-}
+};
 
-// game();
+// Function who display in DOM who has win the game
 
+function whoWinTheGame () {
+    if ((playerScore + computerScore) == 5) {
+        if (playerScore > computerScore) {
+            gameWinner = 'Player win the game !!';
+        }
+        else {
+            gameWinner = 'Computer win the game !! Try again';
+        }
+    }
+    const domGameWinner = document.querySelector('.finalResult');
+    domGameWinner.textContent = gameWinner;
+};
 
